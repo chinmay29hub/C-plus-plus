@@ -1,19 +1,20 @@
 #include<iostream>
 #include<string>
+
+#include<algorithm>
+
 using namespace std;
 
 int main () {
     string s;
     getline(cin, s);
-    cout<<s<<endl;
-    s.clear();
 
-    if (s.empty()) {
-        cout<<"empty";
-    }
-    else {
-        cout<<"not empty";
-    }
+    sort(s.begin(), s.end());
+
+    cout<<s<<endl;
+
     return 0;
+
+
 
 }
