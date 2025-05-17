@@ -1,3 +1,6 @@
+import collections
+
+
 class TreeNode:
     def __init__(self, data):
         self.data = data
@@ -51,6 +54,45 @@ class TreeNode:
 
         return False
 
+    def bfs(self, val):
+        q = collections.deque()
+        q.append(self)
+
+        while q:
+            node = q.popleft()
+
+            if node:
+                if node.data == val:
+                    return True
+
+                for child in node.children:
+                    q.append(child)
+
+        return False
+
+    def bfsTraversal(self):
+        res = []
+        q = collections.deque()
+
+        q.append(self)
+
+        while q:
+            qlen = len(q)
+            level = []
+
+            for i in range(qlen):
+                node = q.popleft()
+
+                if node:
+                    level.append(node.data)
+                    for child in node.children:
+                        q.append(child)
+
+            if level:
+                res.append(level)
+
+        return res
+
 
 root = TreeNode("Electronics")
 
@@ -81,3 +123,5 @@ print("--------")
 root.postOrderTraversal()
 
 print(root.dfs("LGl"))
+print(root.bfs("LGl"))
+print(root.bfsTraversal())
