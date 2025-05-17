@@ -29,6 +29,28 @@ class TreeNode:
             for child in self.children:
                 child.printTree()
 
+    def preOrderTraversal(self):
+        print(self.data)
+
+        for child in self.children:
+            child.preOrderTraversal()
+
+    def postOrderTraversal(self):
+        for child in self.children:
+            child.postOrderTraversal()
+
+        print(self.data)
+
+    def dfs(self, val):
+        if val == self.data:
+            return True
+
+        for child in self.children:
+            if child.dfs(val):
+                return True
+
+        return False
+
 
 root = TreeNode("Electronics")
 
@@ -53,3 +75,9 @@ root.addChild(televisions)
 
 # print(cellphones.getLevel())
 root.printTree()
+
+root.preOrderTraversal()
+print("--------")
+root.postOrderTraversal()
+
+print(root.dfs("LGl"))
