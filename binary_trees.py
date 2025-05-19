@@ -32,6 +32,60 @@ class BinarySearchTreeNode:  # Or Binary Tree
             else:
                 self.right = BinarySearchTreeNode(data)
 
+    def deleteNodeWithMin(self, val):
+        if val < self.data:
+            if self.left:
+                self.left = self.left.deleteNodeWithMin(val)
+            else:
+                return None
+        elif val > self.data:
+            if self.right:
+                self.right = self.right.deleteNodeWithMin(val)
+            else:
+                return None
+        else:
+            if self.left is None and self.right is None:
+                return None
+
+            if self.left is None:
+                return self.right
+
+            if self.right is None:
+                return self.left
+
+            minRight = self.right.findMin()
+            self.data = minRight
+            self.right = self.right.deleteNodeWithMin(minRight)
+
+        return self
+
+    def deleteNodeWithMax(self, val):
+        if val < self.data:
+            if self.left:
+                self.left = self.left.deleteNodeWithMax(val)
+            else:
+                return None
+        elif val > self.data:
+            if self.right:
+                self.right = self.right.deleteNodeWithMax(val)
+            else:
+                return None
+        else:
+            if self.left is None and self.right is None:
+                return None
+
+            if self.left is None:
+                return self.right
+
+            if self.right is None:
+                return self.left
+
+            maxLeft = self.left.findMax()
+            self.data = maxLeft
+            self.left = self.left.deleteNodeWithMax(maxLeft)
+
+        return self
+
     def searchTree(self, val):  # dfs
         if self.data == val:
             return True
@@ -90,19 +144,29 @@ class BinarySearchTreeNode:  # Or Binary Tree
         return elements
 
     def findMin(self):
-        curr = self
-        while curr.left:
-            curr = curr.left
+        # curr = self
+        # while curr.left:
+        #     curr = curr.left
 
-        return curr.data
+        # return curr.data
+
+        if self.left is None:
+            return self.data
+
+        return self.left.findMin()
 
     def findMax(self):
-        curr = self
+        # curr = self
 
-        while curr.right:
-            curr = curr.right
+        # while curr.right:
+        #     curr = curr.right
 
-        return curr.data
+        # return curr.data
+
+        if self.right is None:
+            return self.data
+
+        return self.right.findMax()
 
     def bfs(self, val):
         q = collections.deque()
@@ -163,13 +227,15 @@ print(numbers_tree.postOrderTraversal())
 print(numbers_tree.searchTree(100))
 print(numbers_tree.findMin())
 print(numbers_tree.findMax())
+numbers_tree.deleteNodeWithMin(20)
+print(numbers_tree.inOrderTraversal())
 
-countries = ["India", "USA", "China", "Brazil", "France", "Australia"]
-countries_tree = buildTree(countries)
+# countries = ["India", "USA", "China", "Brazil", "France", "Australia"]
+# countries_tree = buildTree(countries)
 
-print(countries_tree.inOrderTraversal())
-print(countries_tree.searchTree("China"))
-print(countries_tree.searchTree("Germany"))
+# print(countries_tree.inOrderTraversal())
+# print(countries_tree.searchTree("China"))
+# print(countries_tree.searchTree("Germany"))
 
-print(countries_tree.bfs("ajsjdsjd"))
-print(numbers_tree.bfsTraversal())
+# print(countries_tree.bfs("ajsjdsjd"))
+# print(numbers_tree.bfsTraversal())
