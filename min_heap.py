@@ -37,6 +37,7 @@ print("Heap after heapreplace:", heap)
 data = [25, 3, 18, 9, 40]
 heapq.heapify(data)
 print("After heapify:", data)
+print(data[-1])
 # Output: [3, 9, 18, 25, 40] (valid min-heap)
 
 # 7. nlargest and nsmallest
