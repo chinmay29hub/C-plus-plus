@@ -1,0 +1,23 @@
+# Simulating an SQL table using only tuples (no lists, no dicts)
+
+# Step 1: Create a table (tuple of tuples)
+students = (
+    (1, "Chinmay", 22),
+    (2, "Raj", 25),
+    (3, "Aditi", 20),
+)
+
+# Step 2: Select rows (like SELECT * FROM students WHERE age > 21)
+def select_students_by_age(table, min_age):
+    return tuple(row for row in table if row[2] > min_age)
+
+# Step 3: Insert a row (like INSERT INTO students VALUES (...))
+def insert_row(table, new_row):
+    return table + (new_row,)  # tuples are immutable, so return a new one
+
+# Example usage
+students = insert_row(students, (4, "Neha", 23))
+results = select_students_by_age(students, 21)
+
+print("All students:", students)
+print("Students older than 21:", results)
